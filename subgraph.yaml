@@ -1,0 +1,29 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: FluxP2PFactory
+    network: aurora-testnet
+    source:
+      address: "0x13dd5C7D444448f2235D1B874b0b63897b9D8A46"
+      abi: FluxP2PFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Log
+        - PriceFeedCreated
+        - PriceFeedSignersModified
+      abis:
+        - name: FluxP2PFactory
+          file: ./abis/FluxP2PFactory.json
+      eventHandlers:
+        - event: Log(string)
+          handler: handleLog
+        - event: PriceFeedCreated(indexed bytes32,indexed address,address[])
+          handler: handlePriceFeedCreated
+        - event: PriceFeedSignersModified(indexed bytes32,address,bool)
+          handler: handlePriceFeedSignersModified
+      file: ./src/flux-p-2-p-factory.ts
