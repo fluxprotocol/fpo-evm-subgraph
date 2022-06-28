@@ -27,3 +27,37 @@ dataSources:
         - event: PriceFeedSignersModified(indexed bytes32,address,bool)
           handler: handlePriceFeedSignersModified
       file: ./src/flux-p-2-p-factory.ts
+templates:
+  - kind: ethereum
+    name: FluxPriceFeed
+    network: aurora-testnet
+    source:
+      abi: FluxPriceFeed
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/flux-price-feed.ts
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeed
+          file: ./abis/FluxPriceFeed.json
+      eventHandlers:
+        - event: AnswerUpdated(indexed int256,indexed uint256,uint256)
+          handler: handleAnswerUpdated
+        - event: NewRound(indexed uint256,indexed address,uint256)
+          handler: handleNewRound
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
