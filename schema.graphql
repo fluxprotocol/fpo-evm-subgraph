@@ -1,5 +1,17 @@
-type ExampleEntity @entity {
+type PriceFeed @entity {
   id: ID!
-  count: BigInt!
-  message: String! # string
+  address: Bytes!
+  transmissions: [Transmission] @derivedFrom(field: "price_feed")
+  signers: [Bytes!]!
+  pair: String!
+  decimals: BigInt!
+  creator: Bytes!
+}
+
+type Transmission @entity(immutable: true) {
+  id: ID!
+  price_feed: PriceFeed
+  round_id: BigInt!
+  answer: BigInt!
+  timestamp: BigInt!
 }
