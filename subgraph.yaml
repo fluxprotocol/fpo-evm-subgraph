@@ -26,7 +26,7 @@ dataSources:
           handler: handlePriceFeedCreated
         - event: PriceFeedSignersModified(indexed bytes32,address,bool)
           handler: handlePriceFeedSignersModified
-      file: ./src/flux-p-2-p-factory.ts
+      file: ./src/mapping.ts
 templates:
   - kind: ethereum
     name: FluxPriceFeed
@@ -37,7 +37,7 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
-      file: ./src/flux-price-feed.ts
+      file: ./src/mapping.ts
       entities:
         - AnswerUpdated
         - NewRound
