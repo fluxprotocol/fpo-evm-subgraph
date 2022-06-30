@@ -33,5 +33,13 @@ export function handlePriceFeedSignersModified(
     return
   }
 
-  // add or remove signer from event
+  if (event.params.isAdded == true) {
+    entity.signers.push(event.params.signer)
+  } else {
+    entity.signers = entity.signers.filter(
+      signer => signer !== event.params.signer
+    )
+  }
+
+  entity.save()
 }
