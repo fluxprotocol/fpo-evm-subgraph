@@ -1,23 +1,26 @@
-import { FluxPriceFeed } from "../generated/FluxPriceFeed/FluxPriceFeed"
+import { BigInt } from '@graphprotocol/graph-ts'
+import { FluxPriceFeed as PriceFeedTemplate } from "../generated/templates"
+import { FluxPriceFeed as PriceFeedContract } from "../generated/templates/FluxPriceFeed/FluxPriceFeed"
+import { PriceFeed as PriceFeedSchema } from "../generated/schema"
 import {
   PriceFeedCreated,
   PriceFeedSignersModified
 } from "../generated/FluxP2PFactory/FluxP2PFactory"
-import { PriceFeed } from "../generated/schema"
 
 export function handlePriceFeedCreated(event: PriceFeedCreated): void {
-  let entity = PriceFeed.load(event.params.id)
+  let entity = PriceFeedSchema.load(event.params.id)
   if (!entity) {
-    entity = new PriceFeed(event.params.id)
+    entity = new PriceFeedSchema(event.params.id)
   }
 
-  let contract = FluxPriceFeed.bind(event.params.oracle)
-
+  let contract = PriceFeedContract.bind(event.params.oracle)
   entity.address = event.params.oracle
   entity.pair = contract.description()
-  entity.decimals = contract.decimals()
+  entity.decimals = BigInt.fromI32(contract.decimals())
   entity.creator = event.transaction.from
   entity.signers = event.params.signers
+  
+  PriceFeedTemplate.create(event.params.oracle)
 
   entity.save()
 }
@@ -25,7 +28,7 @@ export function handlePriceFeedCreated(event: PriceFeedCreated): void {
 export function handlePriceFeedSignersModified(
   event: PriceFeedSignersModified
 ): void {
-  let entity = PriceFeed.load(event.params.id)
+  let entity = PriceFeedSchema.load(event.params.id)
   if (!entity) {
     return
   }

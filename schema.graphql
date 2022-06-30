@@ -5,7 +5,7 @@ type PriceFeed @entity {
   decimals: BigInt!
   creator: Bytes!
   signers: [Bytes!]!
-  transmissions: [Transmission] @derivedFrom(field: "price_feed")
+  transmissions: [Transmission!] @derivedFrom(field: "price_feed")
 }
 
 type Transmission @entity(immutable: true) {
