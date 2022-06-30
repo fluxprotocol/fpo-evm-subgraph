@@ -1,6 +1,5 @@
 type PriceFeed @entity {
   id: Bytes!
-  address: Bytes!
   pair: String!
   decimals: BigInt!
   creator: Bytes!

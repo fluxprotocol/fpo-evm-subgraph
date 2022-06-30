@@ -4,10 +4,10 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ fpo-evm",
-    "create-local": "graph create --node http://localhost:8020/ fpo-evm",
-    "remove-local": "graph remove --node http://localhost:8020/ fpo-evm",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 fpo-evm"
+    "deploy": "graph deploy --product hosted-service jamesondh/flux-p2p-factory",
+    "create-local": "graph create --node http://localhost:8020/ jamesondh/flux-p2p-factory",
+    "remove-local": "graph remove --node http://localhost:8020/ jamesondh/flux-p2p-factory",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 jamesondh/flux-p2p-factory"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.31.0",

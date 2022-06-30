@@ -78,6 +78,12 @@
         "internalType": "address",
         "name": "transmitter",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "timestamp",
+        "type": "uint64"
       }
     ],
     "name": "NewTransmission",

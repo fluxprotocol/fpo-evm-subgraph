@@ -8,6 +8,7 @@ dataSources:
     source:
       address: "0x13dd5C7D444448f2235D1B874b0b63897b9D8A46"
       abi: FluxP2PFactory
+      startBlock: 15000000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -53,7 +54,7 @@ templates:
           handler: handleAnswerUpdated
         - event: NewRound(indexed uint256,indexed address,uint256)
           handler: handleNewRound
-        - event: NewTransmission(indexed uint32,int192,address)
+        - event: NewTransmission(indexed uint32,int192,address,uint64)
           handler: handleNewTransmission
         - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
           handler: handleRoleAdminChanged
