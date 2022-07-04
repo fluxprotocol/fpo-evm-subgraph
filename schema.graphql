@@ -1,5 +1,6 @@
 type PriceFeed @entity {
   id: Bytes!
+  address: Bytes!
   pair: String!
   decimals: BigInt!
   creator: Bytes!
@@ -13,4 +14,5 @@ type Transmission @entity(immutable: true) {
   round_id: BigInt!
   answer: BigInt!
   timestamp: BigInt!
+  num_answers: BigInt!
 }

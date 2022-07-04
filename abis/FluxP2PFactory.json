@@ -9,7 +9,7 @@
         "type": "string"
       }
     ],
-    "name": "Log",
+    "name": "LogTransmitError",
     "type": "event"
   },
   {
@@ -63,17 +63,96 @@
     "type": "event"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "_id", "type": "bytes32" }],
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "id",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "roundId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "int192",
+        "name": "answer",
+        "type": "int192"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint64",
+        "name": "timestamp",
+        "type": "uint64"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "numAnswers",
+        "type": "uint256"
+      }
+    ],
+    "name": "PriceFeedTransmitted",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      }
+    ],
     "name": "addressOfPricePair",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_pricePair", "type": "string" },
-      { "internalType": "uint8", "name": "_decimals", "type": "uint8" },
-      { "internalType": "address[]", "name": "_signers", "type": "address[]" }
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "cancelTransmitSignature",
+        "type": "bool"
+      }
+    ],
+    "name": "cancelSignature",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_pricePair",
+        "type": "string"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_decimals",
+        "type": "uint8"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_signers",
+        "type": "address[]"
+      }
     ],
     "name": "deployOracle",
     "outputs": [],
@@ -82,28 +161,93 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_pricePair", "type": "string" },
-      { "internalType": "uint8", "name": "_decimals", "type": "uint8" },
-      { "internalType": "address", "name": "_creator", "type": "address" }
+      {
+        "internalType": "string",
+        "name": "_pricePair",
+        "type": "string"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_decimals",
+        "type": "uint8"
+      },
+      {
+        "internalType": "address",
+        "name": "_creator",
+        "type": "address"
+      }
     ],
     "name": "hashFeedId",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "pure",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "_id", "type": "bytes32" }],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      }
+    ],
     "name": "latestRoundOfPricePair",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes[]", "name": "_signatures", "type": "bytes[]" },
-      { "internalType": "bytes32", "name": "_id", "type": "bytes32" },
-      { "internalType": "address", "name": "_signer", "type": "address" },
-      { "internalType": "bool", "name": "_add", "type": "bool" }
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      }
+    ],
+    "name": "latestSignerModificationRound",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "_signatures",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "_signer",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_add",
+        "type": "bool"
+      }
     ],
     "name": "modifySigners",
     "outputs": [],
@@ -112,10 +256,26 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes[]", "name": "_signatures", "type": "bytes[]" },
-      { "internalType": "bytes32", "name": "_id", "type": "bytes32" },
-      { "internalType": "int192[]", "name": "_answers", "type": "int192[]" },
-      { "internalType": "uint64[]", "name": "_timestamps", "type": "uint64[]" }
+      {
+        "internalType": "bytes[]",
+        "name": "_signatures",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "int192[]",
+        "name": "_answers",
+        "type": "int192[]"
+      },
+      {
+        "internalType": "uint64[]",
+        "name": "_timestamps",
+        "type": "uint64[]"
+      }
     ],
     "name": "transmit",
     "outputs": [],
@@ -125,17 +285,41 @@
   {
     "inputs": [],
     "name": "typeAndVersion",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "_id", "type": "bytes32" }],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_id",
+        "type": "bytes32"
+      }
+    ],
     "name": "valueFor",
     "outputs": [
-      { "internalType": "int256", "name": "", "type": "int256" },
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "uint256", "name": "", "type": "uint256" }
+      {
+        "internalType": "int256",
+        "name": "",
+        "type": "int256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
