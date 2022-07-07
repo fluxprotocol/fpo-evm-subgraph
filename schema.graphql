@@ -1,10 +1,22 @@
+enum PriceFeedType {
+  P2PFactory
+  Individual
+}
+
+enum KnownProviders {
+  Amberdata
+  Flux
+}
+
 type PriceFeed @entity {
   id: Bytes!
   address: Bytes!
+  type: PriceFeedType!
   pair: String!
   decimals: BigInt!
-  creator: Bytes!
-  signers: [Bytes!]!
+  creator: Bytes
+  signers: [Bytes!]
+  provider: KnownProviders
   transmissions: [Transmission!] @derivedFrom(field: "price_feed")
 }
 

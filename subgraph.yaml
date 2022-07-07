@@ -2,32 +2,547 @@ specVersion: 0.0.4
 schema:
   file: ./schema.graphql
 dataSources:
+
+  ####################
+  #  FluxP2PFactory  #
+  ####################
+
+  # - kind: ethereum
+  #   name: FluxP2PFactory
+  #   network: goerli
+  #   source:
+  #     address: "0x310474992E236dd1cD690c57cA4d5868Bd78352d"
+  #     abi: FluxP2PFactory
+  #     startBlock: 7168673
+  #   mapping:
+  #     kind: ethereum/events
+  #     apiVersion: 0.0.5
+  #     language: wasm/assemblyscript
+  #     entities:
+  #       - Log
+  #       - PriceFeedCreated
+  #       - PriceFeedSignersModified
+  #       - PriceFeedTransmitted
+  #     abis:
+  #       - name: FluxP2PFactory
+  #         file: ./abis/FluxP2PFactory.json
+  #       - name: FluxPriceFeedV2
+  #         file: ./abis/FluxPriceFeedV2.json
+  #     eventHandlers:
+  #       - event: PriceFeedCreated(indexed bytes32,indexed address,address[])
+  #         handler: handlePriceFeedCreated
+  #       - event: PriceFeedSignersModified(indexed bytes32,address,bool)
+  #         handler: handlePriceFeedSignersModified
+  #       - event: PriceFeedTransmitted(indexed bytes32,uint256,int192,uint64,uint256)
+  #         handler: handleNewTransmission
+  #     file: ./src/p2p.ts
+
+  ###############################
+  #  Individual FluxPriceFeeds  #
+  ###############################
+
+  # Provider: Amberdata
+
   - kind: ethereum
-    name: FluxP2PFactory
-    network: goerli
+    name: AmberdataARUSD
+    network: aurora
     source:
-      address: "0x310474992E236dd1cD690c57cA4d5868Bd78352d"
-      abi: FluxP2PFactory
-      startBlock: 7168673
+      address: "0x2720AE5F31643080b8701d677EC284BC646dd290"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Log
-        - PriceFeedCreated
-        - PriceFeedSignersModified
-        - PriceFeedTransmitted
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
       abis:
-        - name: FluxP2PFactory
-          file: ./abis/FluxP2PFactory.json
-        - name: FluxPriceFeed
-          file: ./abis/FluxPriceFeed.json
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
       eventHandlers:
-        - event: PriceFeedCreated(indexed bytes32,indexed address,address[])
-          handler: handlePriceFeedCreated
-        - event: PriceFeedSignersModified(indexed bytes32,address,bool)
-          handler: handlePriceFeedSignersModified
-        - event: PriceFeedTransmitted(indexed bytes32,uint256,int192,uint64,uint256)
+        - event: NewTransmission(indexed uint32,int192,address)
           handler: handleNewTransmission
-      file: ./src/mapping.ts
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: AmberdataBTCUSD
+    network: aurora
+    source:
+      address: "0xBE46e430d336fC827d096Db044cBaEECE72e17bC"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: AmberdataDAIUSD
+    network: aurora
+    source:
+      address: "0x9e3C7532d9E4bfF3298a132101Bcc62576D80e36"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: AmberdataETHUSD
+    network: aurora
+    source:
+      address: "0x842AF8074Fa41583E3720821cF1435049cf93565"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: AmberdataNEARUSD
+    network: aurora
+    source:
+      address: "0x79c57C246794606c83AB32dc56e5cD2030FB552b"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: AmberdataUSDCUSD
+    network: aurora
+    source:
+      address: "0xdD170e697d7ADed472a9284f07576c3449284502"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: AmberdataUSDTUSD
+    network: aurora
+    source:
+      address: "0x55b9eD56737B161677dC5146873E643647Ba5a43"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+
+  # Provider: Flux
+
+  - kind: ethereum
+    name: FluxARUSD
+    network: aurora
+    source:
+      address: "0x226bADecdC1B58C34477A222D2316Db58C015aE7"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxATOMUSD
+    network: aurora
+    source:
+      address: "0xAF5B0A58703A21995C918E7631731700442226FC"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxAURORAUSD
+    network: aurora
+    source:
+      address: "0xAe3F6EB5d0B4C0A4C8571aa1E40bE65FE84f4eE2"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxBTCUSD
+    network: aurora
+    source:
+      address: "0x27C85E3DE52582FB049152F0a41a03f93d6D86c2"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxDAIUSD
+    network: aurora
+    source:
+      address: "0x18aFC38b25229B797E2af47b5056A5f98249Ef12"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxETHUSD
+    network: aurora
+    source:
+      address: "0xA8Ac2Fa1D239c7d96046967ED21503D1F1fB2354"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxLINEARNEAR
+    network: aurora
+    source:
+      address: "0x8f975aC6deFD2c9d50c58BABF4B1f880E6dE7996"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxNEARUSD
+    network: aurora
+    source:
+      address: "0x0a9A9cF9bDe10c861Fc1e45aCe4ea097eaa268eD"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxSTNEARNEAR
+    network: aurora
+    source:
+      address: "0x4c7C89ed1f09ECCe6445e249DB0bDc714965731F"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxTRIUSD
+    network: aurora
+    source:
+      address: "0x00344c89465F3C2D0Ea16077c0ef741bC9bE920A"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxUSDCUSD
+    network: aurora
+    source:
+      address: "0x06b35392094610C8D21FB2409855e231869B287F"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxUSDTUSD
+    network: aurora
+    source:
+      address: "0x5c8C275Bb70C66330F5f60E17530f37a50E6185E"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
+  - kind: ethereum
+    name: FluxXTRIUSD
+    network: aurora
+    source:
+      address: "0x64158fC1c3Efa9451a79C16176Ba3178aD419477"
+      abi: FluxPriceFeedV1
+      startBlock: 69000000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AnswerUpdated
+        - NewRound
+        - NewTransmission
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+      abis:
+        - name: FluxPriceFeedV1
+          file: ./abis/FluxPriceFeedV1.json
+      eventHandlers:
+        - event: NewTransmission(indexed uint32,int192,address)
+          handler: handleNewTransmission
+      file: ./src/individual.ts
